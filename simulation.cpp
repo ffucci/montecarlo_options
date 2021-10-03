@@ -38,7 +38,7 @@ int main()
     auto pricer_call = std::shared_ptr<Pricer<EuropeanPricer>>(new EuropeanPricer(payoffCall, discounter));
     auto pricer_put = std::shared_ptr<Pricer<EuropeanPricer>>(new EuropeanPricer(payoffPut, discounter));
 
-    auto fdm = std::shared_ptr<EulerFDM<GBM>>(new EulerFDM(sde, nt));
+    auto fdm = std::shared_ptr<EulerFDM<GBM>>(new EulerFDM<GBM>(sde, nt));
 
     auto rng_pm = std::shared_ptr<Rng<PolarMarsaglia>>(new PolarMarsaglia());
     auto rng_cpp = std::shared_ptr<Rng<CPPRng>>(new CPPRng());
