@@ -9,6 +9,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_definitions("-std=c++20")
 
 # add the executable
-add_executable(execute_simulation simulation.cpp)
+add_executable(execute_simulation src/simulation.cpp)
 
 
