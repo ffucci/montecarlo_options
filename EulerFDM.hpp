@@ -1,3 +1,5 @@
+// Euler FDM contains the source for applying Euler Finite-Difference Method for 
+// stochastic differential equations 
 #ifndef __EULER_FDM_HPP
 #define __EULER_FDM_HPP
 
@@ -12,12 +14,16 @@ private:
     int nt;
 
 public:
+
     std::vector<double> x; // Mesh array
-    double k; // Mesh size
+    
+    // Mesh size
+    double k; 
 
     double dt_sqrt;
 
     EulerFDM() = default;
+    
     EulerFDM(const std::shared_ptr<SDE>& stochastic_equation,
              int number_subdivisions) : sde(stochastic_equation), nt{number_subdivisions}
     {

@@ -1,4 +1,4 @@
-#ifndef __SUD_HPP
+// SUD orchestrates the all the parts of the application
 #define __SUD_HPP
 
 #include <memory>
