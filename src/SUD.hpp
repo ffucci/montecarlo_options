@@ -27,7 +27,8 @@ class SUD : private Sde, private Pricer, private Fdm, private Rng
         const std::shared_ptr<Pricer>& p,
         const std::shared_ptr<Fdm>& f,
         const std::shared_ptr<Rng>& r,
-        int numberSimulations, int NT) : sde(s), pricer(p), fdm(f), rng(r) {
+        int numberSimulations, int NT) : sde(s), pricer(p), fdm(f), rng(r) 
+    {
         n_sim = numberSimulations;
         sim_path = std::vector<double>(NT + 1);
     }
