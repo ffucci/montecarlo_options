@@ -35,15 +35,16 @@ int main()
     double r = 0.08; double T = 0.25;
     std::function<double()> discounter = [&r, &T](){ return std::exp(-r * T); };
     
-    auto pricer_call = std::shared_ptr<Pricer<EuropeanPricer>>(new EuropeanPricer(payoffCall, discounter));
-    auto pricer_put = std::shared_ptr<Pricer<EuropeanPricer>>(new EuropeanPricer(payoffPut, discounter));
+    // auto pricer_call = std::shared_ptr<EuropeanPricer>(new EuropeanPricer(payoffCall, discounter));
+    auto pricer_call = std::shared_ptr<EuropeanPricer>(new EuropeanPricer(payoffCall, discounter));
+    auto pricer_put = std::shared_ptr<EuropeanPricer>(new EuropeanPricer(payoffPut, discounter));
 
     auto fdm = std::shared_ptr<EulerFDM<GBM>>(new EulerFDM<GBM>(sde, nt));
 
     auto rng_pm = std::shared_ptr<Rng<PolarMarsaglia>>(new PolarMarsaglia());
     auto rng_cpp = std::shared_ptr<Rng<CPPRng>>(new CPPRng());
   
-    SUD<GBM, Pricer<EuropeanPricer>, EulerFDM<GBM>, Rng<CPPRng>> sud(sde, pricer_put, fdm, rng_cpp, num_sim, nt);
+    SUD<GBM, EuropeanPricer, EulerFDM<GBM>, Rng<CPPRng>> sud(sde, pricer_put, fdm, rng_cpp, num_sim, nt);
     sud.start();
 
     std::cout << "C++ rng: " << pricer_put->price() << '\n';

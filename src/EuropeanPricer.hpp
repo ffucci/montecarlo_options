@@ -2,8 +2,9 @@
 #define __EUROPEAN_PRICER_HPP
 
 #include "Pricer.hpp"
+#include <iostream>
 
-class EuropeanPricer : public Pricer<EuropeanPricer>
+class EuropeanPricer : public Pricer
 {
 private:
     double m_price;
@@ -23,6 +24,7 @@ public:
     void process_path(const std::vector<double>& arr) {
         sum += m_payoff(arr.back());
         n_sim++;
+        std::cout << sum << '\n';
     }
 
     //  Notify the end of a simulation
