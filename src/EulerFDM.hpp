@@ -5,8 +5,9 @@
 
 #include <memory>
 #include <vector>
+#include "StochasticDifferentialEquation.hpp"
 
-template <typename SDE>
+template <StochasticDifferentialEquation SDE>
 class EulerFDM
 {
 private:

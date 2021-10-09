@@ -2,8 +2,9 @@
 #define __EUROPEAN_PRICER_HPP
 
 #include "Pricer.hpp"
+#include <iostream>
 
-class EuropeanPricer : public Pricer<EuropeanPricer>
+class EuropeanPricer : public Pricer
 {
 private:
     double m_price;

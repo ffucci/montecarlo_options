@@ -6,14 +6,16 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include "Pricer.hpp"
+#include "StochasticDifferentialEquation.hpp"
+#include "FiniteDifferenceMethodConcept.hpp"
 
-
-template<typename Sde, typename Pricer, typename Fdm, typename Rng>
-class SUD : private Sde, private Pricer, private Fdm, private Rng
+template<StochasticDifferentialEquation Sde, PricerExecutor P, MethodSDE Fdm, typename Rng>
+class SUD : private Sde, private Fdm, private Rng
 {
     private:
         std::shared_ptr<Sde> sde;
-        std::shared_ptr<Pricer> pricer;
+        std::shared_ptr<P> pricer;
         std::shared_ptr<Fdm> fdm;
         std::shared_ptr<Rng> rng; // Random number generator
 
@@ -24,7 +26,7 @@ class SUD : private Sde, private Pricer, private Fdm, private Rng
     public:
     SUD() {}
     SUD(const std::shared_ptr<Sde>& s,
-        const std::shared_ptr<Pricer>& p,
+        const std::shared_ptr<P>& p,
         const std::shared_ptr<Fdm>& f,
         const std::shared_ptr<Rng>& r,
         int numberSimulations, int NT) : sde(s), pricer(p), fdm(f), rng(r) 
