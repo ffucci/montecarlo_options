@@ -7,8 +7,10 @@
 #include <vector>
 #include <iostream>
 #include "Pricer.hpp"
+#include "StochasticDifferentialEquation.hpp"
+#include "FiniteDifferenceMethodConcept.hpp"
 
-template<typename Sde, PricerExecutor P, typename Fdm, typename Rng>
+template<StochasticDifferentialEquation Sde, PricerExecutor P, MethodSDE Fdm, typename Rng>
 class SUD : private Sde, private Fdm, private Rng
 {
     private:
