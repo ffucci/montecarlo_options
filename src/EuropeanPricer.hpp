@@ -24,7 +24,6 @@ public:
     void process_path(const std::vector<double>& arr) {
         sum += m_payoff(arr.back());
         n_sim++;
-        std::cout << sum << '\n';
     }
 
     //  Notify the end of a simulation
