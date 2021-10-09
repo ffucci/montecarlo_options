@@ -11,7 +11,7 @@
 #include "FiniteDifferenceMethodConcept.hpp"
 
 template<StochasticDifferentialEquation Sde, PricerExecutor P, MethodSDE Fdm, typename Rng>
-class SUD : private Sde, private Fdm, private Rng
+class SUD : private Rng
 {
     private:
         std::shared_ptr<Sde> sde;
