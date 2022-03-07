@@ -14,23 +14,21 @@ concept PricerExecutor = requires(P pricer, Array arr)
     pricer.price();
 };
 
-
+template <typename Payoff, typename Discounter>
 class Pricer
 {
 
 public:
 
-    std::function<double (double)> m_payoff;
-    std::function<double ()> m_discounter;
-
     Pricer() = default;
 
-    Pricer(const std::function<double (double)>& payoff,
-           const std::function<double ()>& discounter) 
-    {
-        m_payoff = payoff;
-        m_discounter = discounter;
-    }
+    Pricer(Payoff& payoff, Discounter& discounter) : m_payoff(std::forward<Payoff>(payoff)), m_discounter(std::forward<Discounter>(discounter))
+    {}
+
+protected:
+
+    Payoff m_payoff;
+    Discounter m_discounter;
 }; 
 
 #endif

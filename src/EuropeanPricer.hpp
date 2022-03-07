@@ -4,7 +4,8 @@
 #include "Pricer.hpp"
 #include <iostream>
 
-class EuropeanPricer : public Pricer
+template <typename Payoff, typename Discounter>
+class EuropeanPricer : public Pricer<Payoff, Discounter>
 {
 private:
     double m_price;
@@ -13,8 +14,7 @@ private:
 
 public:
     EuropeanPricer() {}
-    EuropeanPricer(const std::function<double (double)>& payoff,
-                   const std::function<double()>& discounter) : Pricer(payoff, discounter)
+    EuropeanPricer(Payoff& payoff,Discounter& discounter) : Pricer<Payoff,Discounter>(payoff, discounter)
     {
         m_price = sum = 0.0;
         n_sim = 0;
@@ -22,7 +22,7 @@ public:
 
     // Create a single path
     void process_path(const std::vector<double>& arr) {
-        sum += m_payoff(arr.back());
+        sum += Pricer<Payoff,Discounter>::m_payoff(arr.back());
         n_sim++;
     }
 
@@ -34,7 +34,7 @@ public:
 
     double discount_factor()
     {
-        return m_discounter();
+        return Pricer<Payoff,Discounter>::m_discounter();
     }
 
     // Option price
